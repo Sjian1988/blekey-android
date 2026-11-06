@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    通知小图标(status bar 常驻图标 + 通知卡片)。
+
+    规范: 24x24dp、单色剪影。系统只取 alpha 通道自己着色(浅色面板涂深色、
+    深色面板涂白), 所以这里千万别放渐变或多色 —— 都会被压成同一个颜色。
+    白色只是"不透明"的占位。
+
+    造型跟启动器图标同一把钥匙(环 + 杆 + 两齿), 但必须为 24dp 重新排:
+    启动器那套线宽 5.5/108, 等比缩到 24 只剩 1.2dp, 状态栏里会糊成一团。
+    这里线宽放到 2.2~2.3, 齿间距 3.2, 是"还认得出是钥匙"的下限。
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+
+    <!-- 环: 圆心 (7.4,12) 半径 3.2 -->
+    <path
+        android:pathData="M4.2,12 a3.2,3.2 0 1,0 6.4,0 a3.2,3.2 0 1,0 -6.4,0"
+        android:strokeColor="#FFFFFFFF"
+        android:strokeWidth="2.3"
+        android:strokeLineCap="round" />
+
+    <!-- 杆 -->
+    <path
+        android:pathData="M10.6,12 L20.6,12"
+        android:strokeColor="#FFFFFFFF"
+        android:strokeWidth="2.3"
+        android:strokeLineCap="round" />
+
+    <!-- 两齿 -->
+    <path
+        android:pathData="M15.6,12 L15.6,16.4 M18.8,12 L18.8,15.2"
+        android:strokeColor="#FFFFFFFF"
+        android:strokeWidth="2.2"
+        android:strokeLineCap="round" />
+</vector>

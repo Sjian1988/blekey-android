@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 图标底色: 左上深青绿 -> 右下亮青, 与 PNG 兜底图一致 -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <gradient
+        android:angle="315"
+        android:endColor="#14B8A6"
+        android:startColor="#0B5F58" />
+</shape>

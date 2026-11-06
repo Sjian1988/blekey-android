@@ -1,0 +1,40 @@
+# ---- 签名密钥：绝对不要提交 ----
+*.jks
+*.keystore
+*.p12
+*.pfx
+*.pem
+*.key
+*.kdbx
+debug.keystore
+keystore.properties
+signing.properties
+local.properties
+
+# ---- 本地工具链（JDK + build-tools，约 800MB，按需自备）----
+# 不带尾斜杠：同时匹配目录、Windows junction 和 symlink
+/sdk
+
+# ---- 构建中间产物 ----
+/build/
+*.idsig
+*.apk.idsig
+
+# ---- 日志、抓包与调试产物 ----
+/logs/
+/out/
+/.bak-ui/
+*.log
+*.logcat
+doze_test.txt
+ui.xml
+u3.xml
+
+# ---- 操作系统 / 编辑器 ----
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+*.iml
+*.swp

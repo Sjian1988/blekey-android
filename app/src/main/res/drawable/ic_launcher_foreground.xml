@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    图标前景: 一把钥匙(环 + 杆 + 两齿)。
+    坐标基准 108x108, 与 tools/GenIcon.java 完全一致, 改一处要同步改另一处。
+
+    注意尺寸: 启动器只显示画布中心 66x66 那一块, 所以图形按"可见区"排版,
+    横向落在 29~79(可见区 75% 左右)。按 108 铺满会顶到遮罩边缘被切掉。
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <path
+        android:pathData="M31.8,54 a8.2,8.2 0 1,0 16.4,0 a8.2,8.2 0 1,0 -16.4,0"
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="5.5"
+        android:strokeLineCap="round" />
+    <path
+        android:pathData="M49,54 L76,54"
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="5.5"
+        android:strokeLineCap="round" />
+    <path
+        android:pathData="M65,54 L65,65 M73,54 L73,62"
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="4.8"
+        android:strokeLineCap="round" />
+</vector>
