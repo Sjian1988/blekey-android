@@ -1,0 +1,10 @@
+# 仓库内统一 LF。Windows checkout 若把 build.sh 转成 CRLF，
+# 在 Linux / macOS 上会因 "#!/usr/bin/env bash\r" 直接执行失败。
+* text=auto eol=lf
+
+# 二进制资源不做换行转换
+*.png  binary
+*.apk  binary
+*.jar  binary
+*.jks  binary
+*.keystore binary
