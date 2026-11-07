@@ -5,7 +5,7 @@
 ![version](https://img.shields.io/badge/version-1.4-0F766E)
 ![platform](https://img.shields.io/badge/Android-6.0%2B%20(API%2023)-3DDC84)
 ![license](https://img.shields.io/badge/license-Apache--2.0-blue)
-![status](https://img.shields.io/badge/status-private%20%2F%20pre--open--source-yellow)
+![status](https://img.shields.io/badge/status-public-brightgreen)
 
 | 浅色主题 | 深色主题 |
 | :---: | :---: |
@@ -128,21 +128,21 @@ blekey-android/
 
 编译、安装、GATT 握手、鉴权、解锁指令全链路已在真机（Android 16 / HyperOS 3）完成验证；部分功能仍待实车确认。完整清单见 [docs/verification.md](docs/verification.md)。
 
-**当前仓库为私有**，用于整理与自查，尚未公开发布。
+仓库已于 2026-11 转为公开，欢迎 Issue 与 PR。
 
-### 开源计划
+### 后续计划
 
-- [ ] 协议文档与抓包示例完成脱敏复核
+- [x] 协议文档与抓包示例完成脱敏复核
+- [x] 完成第三方商标 / 名称使用声明后转为公开仓库
 - [ ] 补充多车型 / 多车盒固件版本的兼容性说明
 - [ ] 补充英文 README 与 Contribution Guide
 - [ ] 用正式发布证书替换调试签名，并通过 GitHub Releases 分发
-- [ ] 完成第三方商标 / 名称使用声明后转为公开仓库
 
 ---
 
 ## 范围与免责声明
 
-- 本仓库**只包含本人自研的客户端源码、协议层结论与构建脚本**，不包含任何第三方应用的代码、DEX、APK、反编译产物，也不包含针对第三方应用的脱壳 / 逆向过程资料。
+- 本仓库**只包含本人自研的客户端源码、协议层结论（推导记录见 [docs/dev-notes.md](docs/dev-notes.md)）与构建脚本**，不包含任何第三方应用的代码、DEX、APK 等产物，也不包含脱壳、加固绕过一类工具链资料。
 - 本项目是面向**本人自有车辆**的互操作性研究，仅用于个人使用。使用者应确保对目标车辆拥有合法所有权或明确授权，并遵守所在地法律法规。
 - 解锁、落锁、开启后备箱都是**不可撤销的物理动作**。请在安全环境下使用，因使用本软件产生的任何后果由使用者自行承担。
 - 原厂应用名称、协议、商标归各自权利人所有。本项目与其无关联、未获其授权，也不是官方替代品。
