@@ -45,7 +45,13 @@
 
 ## 安装
 
-现成安装包：[`release/BleKey-1.4.apk`](release/BleKey-1.4.apk)
+**推荐从 [Releases](https://github.com/Sjian1988/blekey-android/releases/latest) 下载**，那里是按版本归档的正式产物，附 SHA-256 校验值：
+
+```
+https://github.com/Sjian1988/blekey-android/releases/download/v1.4/BleKey-1.4.apk
+```
+
+仓库 `release/` 目录同步保留最新一份，方便直接取用：
 
 ```bash
 adb install -r release/BleKey-1.4.apk
@@ -134,9 +140,10 @@ blekey-android/
 
 - [x] 协议文档与抓包示例完成脱敏复核
 - [x] 完成第三方商标 / 名称使用声明后转为公开仓库
+- [x] 通过 GitHub Releases 按版本分发（当前 [v1.4](https://github.com/Sjian1988/blekey-android/releases/tag/v1.4)）
 - [ ] 补充多车型 / 多车盒固件版本的兼容性说明
 - [ ] 补充英文 README 与 Contribution Guide
-- [ ] 用正式发布证书替换调试签名，并通过 GitHub Releases 分发
+- [ ] 用正式发布证书替换调试签名
 
 ---
 
