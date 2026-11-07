@@ -6,9 +6,11 @@ import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.view.Gravity;
+import android.view.HapticFeedbackConstants;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -241,23 +243,97 @@ final class Ui {
     }
 
     /**
-     * 按下时降低透明度。返回 false 是为了不吞掉 click 事件。
-     * 圆角背景没法套系统波纹(要两份 drawable 来回换), alpha 反馈最省事也够用。
+     * 按下反馈: 轻微缩小 + 变淡 + 触感, 松手回弹。
+     *
+     * 早先的写法是按下就把 alpha 瞬间打到 0.72 —— 手指从按到松常常只有几十毫秒,
+     * 一个没有过渡的静态变化人眼根本抓不到, 用起来就是"点了没反应"。
+     * 现在改成 80ms 压下去、160ms 弹回来, 中间那段缩放才是眼睛能看见的锚点。
+     *
+     * 缩放幅度按控件形状分开: 主操作块(约 110x84dp)缩 6% 才有分量,
+     * 而设置行、入口卡这种宽扁的块横向缩 6% 会像整条塌下去, 只缩 3%。
+     *
+     * 触感走 performHapticFeedback, 跟随系统"触摸振动"开关 —— 系统里关掉了
+     * 就只剩视觉反馈, 不会绕过用户的设置。
+     *
+     * 返回 false 是为了不吞掉 click 事件。
      */
     static void press(View v) {
-        v.setOnTouchListener(new View.OnTouchListener() {
-            public boolean onTouch(View view, MotionEvent e) {
-                int a = e.getActionMasked();
-                if (a == MotionEvent.ACTION_DOWN) {
-                    view.setAlpha(0.72f);
-                } else if (a == MotionEvent.ACTION_UP
-                        || a == MotionEvent.ACTION_CANCEL
-                        || a == MotionEvent.ACTION_OUTSIDE) {
-                    view.setAlpha(1f);
-                }
-                return false;
+        v.setOnTouchListener(new PressFeedback());
+    }
+
+    /** press() 的触摸监听: 只管按下/回弹动画, 不拦截事件。 */
+    private static final class PressFeedback implements View.OnTouchListener {
+
+        /** 压下去要比弹回来快, 手感才"跟手"; 反过来会显得拖沓。 */
+        private static final long DOWN_MS = 80;
+        private static final long UP_MS = 160;
+        private static final float DIMMED = 0.78f;
+
+        private boolean down;
+
+        public boolean onTouch(View v, MotionEvent e) {
+            switch (e.getActionMasked()) {
+                case MotionEvent.ACTION_DOWN:
+                    down(v);
+                    break;
+                case MotionEvent.ACTION_MOVE:
+                    // 手指滑出控件范围就不再算"正在按", 否则松手前会一直停在压下去的状态
+                    if (down && !inside(v, e)) {
+                        up(v);
+                    }
+                    break;
+                case MotionEvent.ACTION_UP:
+                case MotionEvent.ACTION_CANCEL:
+                case MotionEvent.ACTION_OUTSIDE:
+                    if (down) {
+                        up(v);
+                    }
+                    break;
+                default:
+                    break;
             }
-        });
+            return false;
+        }
+
+        private void down(View v) {
+            down = true;
+            float s = scaleOf(v);
+            v.animate().cancel();
+            v.animate().scaleX(s).scaleY(s).alpha(DIMMED)
+                    .setDuration(DOWN_MS)
+                    .setInterpolator(new DecelerateInterpolator())
+                    .start();
+            v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
+        }
+
+        private void up(View v) {
+            down = false;
+            v.animate().cancel();
+            v.animate().scaleX(1f).scaleY(1f).alpha(1f)
+                    .setDuration(UP_MS)
+                    .setInterpolator(new DecelerateInterpolator())
+                    .start();
+        }
+
+        /** 宽高比超过 2.5 的算宽扁控件, 缩得少一点。 */
+        private static float scaleOf(View v) {
+            int w = v.getWidth();
+            int h = v.getHeight();
+            if (h > 0 && w > h * 2.5f) {
+                return 0.97f;
+            }
+            return 0.94f;
+        }
+
+        /** 手指是否还在控件范围内, 留 6% 容差, 轻微抖动不至于立刻断掉反馈。 */
+        private static boolean inside(View v, MotionEvent e) {
+            float padX = v.getWidth() * 0.06f;
+            float padY = v.getHeight() * 0.06f;
+            float x = e.getX();
+            float y = e.getY();
+            return x >= -padX && y >= -padY
+                    && x <= v.getWidth() + padX && y <= v.getHeight() + padY;
+        }
     }
 
     /** 主按钮: 强调色填充。 */

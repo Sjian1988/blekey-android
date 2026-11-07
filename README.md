@@ -2,7 +2,7 @@
 
 一个只做「靠近车机自动连上 + 一键解锁」的最小 Android 客户端。它不替代原厂 App 的刷固件、改设置等功能，只接管蓝牙连接这一件事。
 
-![version](https://img.shields.io/badge/version-1.3-0F766E)
+![version](https://img.shields.io/badge/version-1.4-0F766E)
 ![platform](https://img.shields.io/badge/Android-6.0%2B%20(API%2023)-3DDC84)
 ![license](https://img.shields.io/badge/license-Apache--2.0-blue)
 ![status](https://img.shields.io/badge/status-private%20%2F%20pre--open--source-yellow)
@@ -45,10 +45,10 @@
 
 ## 安装
 
-现成安装包：[`release/BleKey-1.3.apk`](release/BleKey-1.3.apk)
+现成安装包：[`release/BleKey-1.4.apk`](release/BleKey-1.4.apk)
 
 ```bash
-adb install -r release/BleKey-1.3.apk
+adb install -r release/BleKey-1.4.apk
 ```
 
 也可以把 APK 传到手机上点安装（需允许「安装未知来源」）。包名 `com.blekey.rdb`，与原厂 App 不同，可以共存。
